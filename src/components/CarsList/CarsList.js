@@ -1,29 +1,29 @@
-import { CarCard } from "components/CarCard/CarCard";
+import { CarCard } from 'components/CarCard/CarCard';
 
-export const CarsList=()=>{
-const cars=[
+export const CarsList = () => {
+  const cars = [
     {
-    id:1,
-    name:"audi"}, 
+      id: 1,
+      name: 'audi',
+    },
     {
-    id:2,
-    name:"volvo"},
+      id: 2,
+      name: 'volvo',
+    },
     {
-    id:3,
-    name:"ford"}
-];
-    return (
-        <>
-        <ul>
-        {cars.map(({id,name})=>(
-           <li key={id}>
-            <CarCard name={name}/>
-           </li> 
+      id: 3,
+      name: 'ford',
+    },
+  ];
+  return (
+    <>
+      <ul>
+        {cars.map(({ id, name }) => (
+          <li key={id}>
+            <CarCard name={name} />
+          </li>
         ))}
-        </ul>
-        </>
-    )
-
-    
-
-}
+      </ul>
+    </>
+  );
+};
