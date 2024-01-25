@@ -1,19 +1,15 @@
 import { CarCard } from 'components/CarCard/CarCard'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { incrementfavoritCars } from '../../redux/store'
-export const CarsList = () => {
-	const { pathname } = useLocation()
+import { incrementfavoritCars, incrementCar } from '../../redux/store'
 
-	console.log(pathname)
+export const CarsList = () => {
+	const dispatch = useDispatch()
+	const { pathname } = useLocation()
 
 	const listCars = useSelector(state => state.listCars)
 	const favoritlistcars = useSelector(state => state.listCarsfavorit)
 
-	const dispatch = useDispatch()
-
-	console.log(listCars)
-	console.log(favoritlistcars)
 	let qqq
 	let flag = false
 	if (pathname === '/catalog') {

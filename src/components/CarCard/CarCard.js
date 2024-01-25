@@ -1,5 +1,5 @@
 export const CarCard = ({ iname }) => {
-	console.log(iname)
+	// console.log(iname)
 	return (
 		<>
 			<img></img>

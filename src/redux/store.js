@@ -15,28 +15,29 @@ const cars = [
 		name: 'ford',
 	},
 ]
-export const increment = createAction('listCars/increment')
-
+export const incrementCar = createAction('incrementCar')
+// console.log(incrementCar())
 export const incrementfavoritCars = createAction(
 	'listCarsfavorit/incrementfavoritCars'
 )
 
-const myReducer = createReducer(cars, builder => {
-	builder.addCase('increment', (state, action) => {
-		state++
+const carListReducer = createReducer(cars, builder => {
+	// console.log('HELP')
+	builder.addCase(incrementCar, (state, action) => {
+		console.log(action.payload)
+		state.push(action.payload)
 	})
 })
 
-const favoritCarsReducer = createReducer({}, builder => {
-	console.log('HELP')
-	builder.addCase('incrementfavoritCars', (state, action) => {
-		state++
+const favoritCarsReducer = createReducer([], builder => {
+	builder.addCase(incrementfavoritCars, (state, action) => {
+		state.push(action.payload)
 	})
 })
 
 export const store = configureStore({
 	reducer: {
-		listCars: myReducer,
+		listCars: carListReducer,
 		listCarsfavorit: favoritCarsReducer,
 	},
 })
