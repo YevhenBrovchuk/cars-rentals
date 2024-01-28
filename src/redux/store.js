@@ -37,7 +37,7 @@ const listCarsfavoritSlice = createSlice({
 			state.push(action.payload)
 		},
 		dicrementfavoritCars(state, action) {
-			state.filter(item => item !== action.payload)
+			return state.filter(item => item.id !== action.payload)
 		},
 	},
 })

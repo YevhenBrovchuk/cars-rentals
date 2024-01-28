@@ -22,6 +22,7 @@ export const CarsList = () => {
 	}
 	if (pathname === '/favorites') {
 		qqq = favoritlistcars
+		flag = false
 	}
 
 	// const flagFavoritCars = () => {
@@ -31,6 +32,7 @@ export const CarsList = () => {
 	// 	return incrementfavoritCars
 	// }
 	// console.log(flagFavoritCars())
+
 	return (
 		<>
 			<div>{pathname}</div>
@@ -40,7 +42,7 @@ export const CarsList = () => {
 						{flag && favoritlistcars.length > 0 ? (
 							<button
 								type='button'
-								onClick={() => dispatch(dicrementfavoritCars({ id, name }))}
+								onClick={() => dispatch(dicrementfavoritCars(id))}
 							>
 								{name}
 							</button>
