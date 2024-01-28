@@ -13,44 +13,46 @@ export const CarsList = () => {
 
 	const listCars = useSelector(state => state.listCars)
 	const favoritlistcars = useSelector(state => state.listCarsfavorit)
-	console.log(favoritlistcars.length)
-	let qqq
+
 	let flag = false
-	if (pathname === '/catalog') {
-		qqq = listCars
-		flag = true
-	}
-	if (pathname === '/favorites') {
-		qqq = favoritlistcars
-		flag = false
+
+	const carsList = (listCars, favoritlistcars) => {
+		if (pathname === '/catalog') {
+			flag = true
+			return listCars
+		} else if (pathname === '/favorites') {
+			flag = false
+			return favoritlistcars
+		}
 	}
 
-	// const flagFavoritCars = () => {
-	// 	if (favoritlistcars.length > 0) {
-	// 		return dicrementfavoritCars
-	// 	}
-	// 	return incrementfavoritCars
-	// }
-	// console.log(flagFavoritCars())
+	const helper = e => {
+		const id = Number(e.currentTarget.id)
+		const name = e.currentTarget.name
+		if (favoritlistcars.length > 0) {
+			const flagFavoritlistcars = favoritlistcars.some(
+				favoritCar => favoritCar.id === id
+			)
+			if (!flagFavoritlistcars) {
+				dispatch(incrementfavoritCars({ id, name }))
+				return
+			} else {
+				dispatch(dicrementfavoritCars(id))
+				return
+			}
+		}
+		dispatch(incrementfavoritCars({ id, name }))
+		return
+	}
 
 	return (
 		<>
 			<div>{pathname}</div>
 			<ul>
-				{qqq.map(({ id, name }) => (
+				{carsList(listCars, favoritlistcars).map(({ id, name }) => (
 					<li key={id}>
-						{flag && favoritlistcars.length > 0 ? (
-							<button
-								type='button'
-								onClick={() => dispatch(dicrementfavoritCars(id))}
-							>
-								{name}
-							</button>
-						) : (
-							<button
-								type='button'
-								onClick={() => dispatch(incrementfavoritCars({ id, name }))}
-							>
+						{flag && (
+							<button type='button' id={id} name={name} onClick={helper}>
 								{name}
 							</button>
 						)}

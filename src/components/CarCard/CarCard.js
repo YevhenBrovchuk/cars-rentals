@@ -1,5 +1,13 @@
+import React, { useState, useCallback } from 'react'
+import { Modal } from 'components/Modal/Modal'
+import { ModalCard } from 'components/ModalCard/ModalCard'
 export const CarCard = ({ iname }) => {
-	// console.log(iname)
+	const [showModal, setShowModal] = useState(false)
+
+	const toggleModal = useCallback(() => {
+		setShowModal(prevShowModal => !prevShowModal)
+	}, [])
+
 	return (
 		<>
 			<img></img>
@@ -15,7 +23,14 @@ export const CarCard = ({ iname }) => {
 			<p>model</p>
 			<p>id</p>
 			<p>functionalities[1]</p>
-			<button type='button'>LearnMore</button>
+			<button type='button' onClick={toggleModal}>
+				LearnMore
+			</button>
+			{showModal && (
+				<Modal onClose={toggleModal}>
+					<ModalCard name={iname} flagModal={toggleModal} />
+				</Modal>
+			)}
 		</>
 	)
 }

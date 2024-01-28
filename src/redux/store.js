@@ -3,15 +3,15 @@ import { createAction, createReducer, createSlice } from '@reduxjs/toolkit'
 
 const cars = [
 	{
-		id: 1,
+		id: 110,
 		name: 'audi',
 	},
 	{
-		id: 2,
+		id: 210,
 		name: 'volvo',
 	},
 	{
-		id: 3,
+		id: 310,
 		name: 'ford',
 	},
 ]
