@@ -2,9 +2,8 @@ import { CarCard } from 'components/CarCard/CarCard'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-	incrementfavoritCars,
-	incrementCar,
-	dicrementfavoritCars,
+	addfavoritCars,
+	removefavoritCars,
 	getFavoritCars,
 } from '../../redux/slice/favoritCarsSlice'
 import { getCars } from '../../redux/slice/carsSlice'
@@ -36,19 +35,17 @@ export const CarsList = () => {
 				favoritCar => favoritCar.id === id
 			)
 			if (!flagFavoritlistcars) {
-				dispatch(incrementfavoritCars({ id, name }))
+				dispatch(addfavoritCars({ id, name }))
 				return
 			} else {
-				dispatch(dicrementfavoritCars(id))
+				dispatch(removefavoritCars(id))
 				return
 			}
 		}
-		console.log(selectFavoritlistcars)
-		dispatch(incrementfavoritCars({ id, name }))
+		dispatch(addfavoritCars({ id, name }))
 		return
 	}
-	console.log(selectFavoritlistcars)
-	console.log(selectListCars)
+
 	return (
 		<>
 			<div>{pathname}</div>

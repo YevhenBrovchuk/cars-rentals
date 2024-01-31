@@ -34,13 +34,13 @@ export const listCarsSlice = createSlice({
 		],
 	},
 	reducers: {
-		incrementCar(state, action) {
+		addCar(state, action) {
 			state.push(action.payload)
 		},
 	},
 })
 
-export const { incrementCar } = listCarsSlice.actions
+export const { addCar } = listCarsSlice.actions
 // export default listCarsSlice.reducer
 
 export const getCars = state => state.listCars.listCars
