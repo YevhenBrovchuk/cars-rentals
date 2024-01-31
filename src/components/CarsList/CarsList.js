@@ -5,32 +5,34 @@ import {
 	incrementfavoritCars,
 	incrementCar,
 	dicrementfavoritCars,
-} from '../../redux/store'
+	getFavoritCars,
+} from '../../redux/slice/favoritCarsSlice'
+import { getCars } from '../../redux/slice/carsSlice'
 
 export const CarsList = () => {
 	const dispatch = useDispatch()
 	const { pathname } = useLocation()
 
-	const listCars = useSelector(state => state.listCars)
-	const favoritlistcars = useSelector(state => state.listCarsfavorit)
+	const selectListCars = useSelector(getCars)
+	const selectFavoritlistcars = useSelector(getFavoritCars)
 
 	let flag = false
 
-	const carsList = (listCars, favoritlistcars) => {
+	const carsList = (selectListCars, selectFavoritlistcars) => {
 		if (pathname === '/catalog') {
 			flag = true
-			return listCars
+			return selectListCars
 		} else if (pathname === '/favorites') {
 			flag = false
-			return favoritlistcars
+			return selectFavoritlistcars
 		}
 	}
 
 	const helper = e => {
 		const id = Number(e.currentTarget.id)
 		const name = e.currentTarget.name
-		if (favoritlistcars.length > 0) {
-			const flagFavoritlistcars = favoritlistcars.some(
+		if (selectFavoritlistcars.length > 0) {
+			const flagFavoritlistcars = selectFavoritlistcars.some(
 				favoritCar => favoritCar.id === id
 			)
 			if (!flagFavoritlistcars) {
@@ -41,15 +43,17 @@ export const CarsList = () => {
 				return
 			}
 		}
+		console.log(selectFavoritlistcars)
 		dispatch(incrementfavoritCars({ id, name }))
 		return
 	}
-
+	console.log(selectFavoritlistcars)
+	console.log(selectListCars)
 	return (
 		<>
 			<div>{pathname}</div>
 			<ul>
-				{carsList(listCars, favoritlistcars).map(({ id, name }) => (
+				{carsList(selectListCars, selectFavoritlistcars).map(({ id, name }) => (
 					<li key={id}>
 						{flag && (
 							<button type='button' id={id} name={name} onClick={helper}>

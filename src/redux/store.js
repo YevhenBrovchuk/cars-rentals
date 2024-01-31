@@ -1,49 +1,32 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { createAction, createReducer, createSlice } from '@reduxjs/toolkit'
 
-const cars = [
-	{
-		id: 110,
-		name: 'audi',
-	},
-	{
-		id: 210,
-		name: 'volvo',
-	},
-	{
-		id: 310,
-		name: 'ford',
-	},
-]
+import { listCarsSlice } from './slice/carsSlice'
+import { persistedlistCarsfavoritSliceReduser } from './slice/favoritCarsSlice'
+import {
+	persistStore,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from 'redux-persist'
 
-const listCarsSlice = createSlice({
-	name: 'listCars',
-	initialState: cars,
-	reducers: {
-		incrementCar(state, action) {
-			state.push(action.payload)
-		},
+export const store = configureStore({
+	reducer: {
+		listCars: listCarsSlice.reducer,
+		listCarsfavorit: persistedlistCarsfavoritSliceReduser,
 	},
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
 })
 
-export const { incrementCar } = listCarsSlice.actions
-export default listCarsSlice.reducer
+export const persistor = persistStore(store)
 
-const listCarsfavoritSlice = createSlice({
-	name: 'listCarsfavorit',
-	initialState: [],
-	reducers: {
-		incrementfavoritCars(state, action) {
-			state.push(action.payload)
-		},
-		dicrementfavoritCars(state, action) {
-			return state.filter(item => item.id !== action.payload)
-		},
-	},
-})
-
-export const { incrementfavoritCars, dicrementfavoritCars } =
-	listCarsfavoritSlice.actions
 // export const incrementCar = createAction('incrementCar')
 // console.log(incrementCar())
 // export const incrementfavoritCars = createAction(
@@ -70,10 +53,3 @@ export const { incrementfavoritCars, dicrementfavoritCars } =
 // 			state.filter(item => item !== action.payload)
 // 		})
 // })
-
-export const store = configureStore({
-	reducer: {
-		listCars: listCarsSlice.reducer,
-		listCarsfavorit: listCarsfavoritSlice.reducer,
-	},
-})
