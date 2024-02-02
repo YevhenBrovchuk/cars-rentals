@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchCarsList } from '../operations/carsOperations'
+import { getAll } from '../operations/carsOperations'
 
 export const listCarsSlice = createSlice({
 	name: 'listCars',
@@ -10,15 +10,15 @@ export const listCarsSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
-			.addCase(fetchCarsList.fulfilled, (state, action) => {
+			.addCase(getAll.fulfilled, (state, action) => {
 				state.listCars = action.payload
 				state.isLoading = false
 				state.error = null
 			})
-			.addCase(fetchCarsList.pending, state => {
+			.addCase(getAll.pending, state => {
 				state.isLoading = true
 			})
-			.addCase(fetchCarsList.rejected, (state, action) => {
+			.addCase(getAll.rejected, (state, action) => {
 				state.error = action.payload
 				state.isLoading = false
 			})
