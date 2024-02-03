@@ -1,7 +1,6 @@
 export const ModalCard = ({ name, flagModal }) => {
 	return (
 		<>
-			<img></img>
 			<p>make</p>
 			<p>model={name}</p>
 			<p>year</p>
