@@ -10,7 +10,6 @@ export const CarCard = ({ iname }) => {
 
 	return (
 		<>
-			<img></img>
 			<p>make</p>
 			<p>model={iname}</p>
 			<p>year</p>
