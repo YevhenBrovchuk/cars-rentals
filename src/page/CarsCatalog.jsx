@@ -7,7 +7,6 @@ import { useEffect } from 'react'
 import { getAll } from '../redux/operations/carsOperations'
 export default function CarsCatalog() {
 	const dispatch = useDispatch()
-	// const isLoading = useSelector(loading)
 
 	useEffect(() => {
 		dispatch(getAll())
