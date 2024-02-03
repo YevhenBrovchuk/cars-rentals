@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { Loading } from './Loading/Loading'
+// import { Loading } from './Loading/Loading'
 import { Layout } from './Layout/Layout'
 import { Routes, Route } from 'react-router-dom'
 
